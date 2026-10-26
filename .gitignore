@@ -1,0 +1,17 @@
+# Ignorar arquivos temporários do sistema operacional e IDEs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Ignorar logs e dados locais sensíveis
+*.log
+.env
+
+# Ignorar arquivos core do WordPress caso baixados fora do volume Docker
+wp-admin/
+wp-includes/
+wp-content/uploads/
+wp-content/upgrade/
+wp-content/cache/
+wp-config.php
