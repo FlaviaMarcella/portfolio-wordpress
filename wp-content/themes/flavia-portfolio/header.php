@@ -30,12 +30,20 @@
 
 		<nav class="main-navigation" aria-label="Menu Principal">
 			<?php
-			wp_nav_menu( array(
-				'theme_location' => 'primary',
-				'menu_class'     => 'nav-menu',
-				'container'      => false,
-				'fallback_cb'    => false,
-			) );
+			if ( has_nav_menu( 'primary' ) ) {
+				wp_nav_menu( array(
+					'theme_location' => 'primary',
+					'menu_class'     => 'nav-menu',
+					'container'      => false,
+				) );
+			} else {
+				echo '<ul class="nav-menu">';
+				wp_list_pages( array(
+					'title_li'    => '',
+					'sort_column' => 'menu_order,post_title',
+				) );
+				echo '</ul>';
+			}
 			?>
 			<button type="button" class="theme-toggle" id="theme-toggle" aria-label="Alternar tema claro/escuro">
 				<span id="theme-icon">☀️</span>

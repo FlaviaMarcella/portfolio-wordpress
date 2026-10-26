@@ -3,17 +3,19 @@
  * Script de provisionamento automático das páginas e menu do portfólio da Flávia no WordPress via WP-CLI.
  */
 
-// 1. Limpar páginas e posts padrão (Sample Page / Hello World)
+// 1. Limpar apenas posts padrão ("Olá, mundo!" / "Sample Page") se existirem
 $default_posts = get_posts( array(
 	'post_type'   => array( 'post', 'page' ),
 	'numberposts' => -1,
 	'post_status' => 'any',
 ) );
 foreach ( $default_posts as $p ) {
-	wp_delete_post( $p->ID, true );
+	if ( in_array( $p->post_name, array( 'hello-world', 'ola-mundo', 'sample-page', 'pagina-de-exemplo' ), true ) ) {
+		wp_delete_post( $p->ID, true );
+	}
 }
 
-// 2. Definir as 5 páginas a partir dos arquivos originais enviados
+// 2. Definir e criar/atualizar as 5 páginas a partir dos arquivos originais enviados
 $pages_config = array(
 	array(
 		'title' => 'Início',
@@ -51,18 +53,26 @@ $created_pages = array();
 
 foreach ( $pages_config as $cfg ) {
 	$content = file_get_contents( $cfg['file'] );
-	$page_id = wp_insert_post( array(
-		'post_title'   => $cfg['title'],
-		'post_name'    => $cfg['slug'],
-		'post_content' => $content,
-		'post_status'  => 'publish',
-		'post_type'    => 'page',
-		'menu_order'   => $cfg['order'],
+	$existing = get_page_by_path( $cfg['slug'], OBJECT, 'page' );
+	$post_data = array(
+		'post_title'     => $cfg['title'],
+		'post_name'      => $cfg['slug'],
+		'post_content'   => $content,
+		'post_status'    => 'publish',
+		'post_type'      => 'page',
+		'menu_order'     => $cfg['order'],
 		'comment_status' => 'closed',
 		'ping_status'    => 'closed',
-	) );
+	);
+	if ( $existing ) {
+		$post_data['ID'] = $existing->ID;
+		$page_id = wp_update_post( $post_data );
+		WP_CLI::log( "Página atualizada: {$cfg['title']} (ID: {$page_id})" );
+	} else {
+		$page_id = wp_insert_post( $post_data );
+		WP_CLI::log( "Página criada: {$cfg['title']} (ID: {$page_id})" );
+	}
 	$created_pages[ $cfg['slug'] ] = $page_id;
-	WP_CLI::log( "Página criada: {$cfg['title']} (ID: {$page_id})" );
 }
 
 // 3. Configurar página inicial estática ("Início")
