@@ -9,6 +9,7 @@
 	<meta property="og:description" content="Desenvolvedora Backend com foco em Java e Spring Boot • Graduanda em Ciência da Computação na UNIFAL-MG.">
 	<meta property="og:image" content="https://flaviamarcella.github.io/SquareProfissional.jpg">
 	<meta name="twitter:card" content="summary">
+	<link rel="icon" type="image/svg+xml" href="<?php echo esc_url( get_template_directory_uri() . '/favicon.svg' ); ?>">
 	<script>
 		(function() {
 			const savedTheme = localStorage.getItem('flavia_theme') || 'dark';

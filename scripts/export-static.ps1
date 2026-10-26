@@ -36,9 +36,11 @@ foreach ($r in $routes) {
     [System.IO.File]::WriteAllText((Resolve-Path $destFolder).Path + "\" + (Split-Path $destPath -Leaf), $html, (New-Object System.Text.UTF8Encoding($false)))
 }
 
-# Copiar arquivos do tema (style.css) para manter o mesmo caminho do WordPress
+# Copiar arquivos do tema (style.css e favicon.svg) para manter o mesmo caminho do WordPress
 $themeDest = Join-Path $OutputDir "wp-content/themes/flavia-portfolio"
 New-Item -ItemType Directory -Path $themeDest -Force | Out-Null
 Copy-Item "wp-content/themes/flavia-portfolio/style.css" -Destination (Join-Path $themeDest "style.css") -Force
+Copy-Item "wp-content/themes/flavia-portfolio/favicon.svg" -Destination (Join-Path $themeDest "favicon.svg") -Force
+Copy-Item "wp-content/themes/flavia-portfolio/favicon.svg" -Destination (Join-Path $OutputDir "favicon.svg") -Force
 
 Write-Host "Exportacao estatica concluida em '$OutputDir'!"
