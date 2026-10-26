@@ -23,7 +23,7 @@ get_header();
 					<a class="btn-cta btn-cta-secondary icon-start icon-github" href="https://github.com/FlaviaMarcella" target="_blank" rel="noopener noreferrer">
 						GitHub (@FlaviaMarcella) ↗
 					</a>
-					<a class="btn-cta btn-cta-secondary icon-start icon-linkedin" href="https://linkedin.com/in/flavia-marcella" target="_blank" rel="noopener noreferrer">
+					<a class="btn-cta btn-cta-secondary icon-start icon-linkedin" href="https://www.linkedin.com/in/flaviamarcella" target="_blank" rel="noopener noreferrer">
 						LinkedIn ↗
 					</a>
 					<a class="btn-cta btn-cta-secondary icon-start icon-mail" href="<?php echo esc_url( home_url( '/contato/' ) ); ?>">

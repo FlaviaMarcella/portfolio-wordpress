@@ -5,7 +5,7 @@
 		</div>
 		<div class="footer-links">
 			<a href="https://github.com/FlaviaMarcella" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-			<a href="https://linkedin.com/in/flavia-marcella" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+			<a href="https://www.linkedin.com/in/flaviamarcella" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
 			<a href="mailto:flaviamgm011@gmail.com">E-mail</a>
 		</div>
 	</div>
