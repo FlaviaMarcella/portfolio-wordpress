@@ -4,9 +4,10 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Ignorar logs e dados locais sensíveis
+# Ignorar logs, build de exportação e dados locais sensíveis
 *.log
 .env
+dist/
 
 # Ignorar arquivos core do WordPress caso baixados fora do volume Docker
 wp-admin/
