@@ -4,8 +4,8 @@
 			&copy; <?php echo esc_html( date_i18n( 'Y' ) ); ?> <strong><?php bloginfo( 'name' ); ?></strong> — Desenvolvedora Backend (Java &amp; Spring Boot).
 		</div>
 		<div class="footer-links">
-			<a href="https://github.com/flaviamarcella" target="_blank" rel="noopener noreferrer">GitHub</a>
-			<a href="https://linkedin.com/in/flavia-marcella" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+			<a href="https://github.com/FlaviaMarcella" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+			<a href="https://linkedin.com/in/flavia-marcella" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
 			<a href="mailto:flaviamgm011@gmail.com">E-mail</a>
 		</div>
 	</div>
@@ -27,6 +27,27 @@
 			document.documentElement.setAttribute('data-theme', next);
 			localStorage.setItem('flavia_theme', next);
 			syncIcon();
+		});
+	}
+
+	const menuBtn = document.getElementById('menu-toggle');
+	const menuWrapper = document.getElementById('primary-menu-wrapper');
+	if (menuBtn && menuWrapper) {
+		const menuIcon = menuBtn.querySelector('.menu-toggle-icon');
+		function setMenuState(open) {
+			menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+			menuWrapper.classList.toggle('is-open', open);
+			if (menuIcon) menuIcon.textContent = open ? '✕' : '☰';
+		}
+		menuBtn.addEventListener('click', function() {
+			const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+			setMenuState(!isExpanded);
+		});
+		document.addEventListener('keydown', function(e) {
+			if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
+				setMenuState(false);
+				menuBtn.focus();
+			}
 		});
 	}
 })();

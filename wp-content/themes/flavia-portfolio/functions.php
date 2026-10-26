@@ -39,7 +39,7 @@ function flavia_portfolio_scripts() {
 		'flavia-portfolio-style',
 		get_stylesheet_uri(),
 		array( 'flavia-google-fonts' ),
-		'1.0.0'
+		'1.1.0'
 	);
 }
 add_action( 'wp_enqueue_scripts', 'flavia_portfolio_scripts' );

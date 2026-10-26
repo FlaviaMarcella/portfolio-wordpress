@@ -1,10 +1,10 @@
 /*
 Theme Name: Flávia Gonçalves Portfolio
-Theme URI: https://github.com/flaviamarcella
+Theme URI: https://github.com/FlaviaMarcella/portfolio-wordpress
 Author: Flávia Gonçalves
 Author URI: https://linkedin.com/in/flavia-marcella
 Description: Tema personalizado de portfólio pessoal e profissional para Flávia Gonçalves (Desenvolvedora Backend Java & Spring Boot). Compatível com blocos Gutenberg.
-Version: 1.0.0
+Version: 1.1.0
 License: GPL-2.0-or-later
 Text Domain: flavia-portfolio
 */
@@ -12,8 +12,8 @@ Text Domain: flavia-portfolio
 :root {
   --bg-primary: #0f172a;
   --bg-secondary: #1e293b;
-  --bg-card: rgba(30, 41, 59, 0.75);
-  --bg-header: rgba(15, 23, 42, 0.88);
+  --bg-card: rgba(30, 41, 59, 0.78);
+  --bg-header: rgba(15, 23, 42, 0.9);
   --text-primary: #f8fafc;
   --text-secondary: #cbd5e1;
   --text-muted: #94a3b8;
@@ -33,14 +33,14 @@ Text Domain: flavia-portfolio
   --bg-primary: #f8fafc;
   --bg-secondary: #f1f5f9;
   --bg-card: #ffffff;
-  --bg-header: rgba(248, 250, 252, 0.9);
+  --bg-header: rgba(248, 250, 252, 0.92);
   --text-primary: #0f172a;
   --text-secondary: #334155;
   --text-muted: #64748b;
   --accent-primary: #0284c7;
   --accent-secondary: #4f46e5;
   --accent-warm: #d97706;
-  --border-subtle: rgba(15, 23, 42, 0.1);
+  --border-subtle: rgba(15, 23, 42, 0.12);
   --border-highlight: rgba(2, 132, 199, 0.35);
   --shadow-lg: 0 15px 35px -10px rgba(15, 23, 42, 0.08);
 }
@@ -67,12 +67,46 @@ body {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
   transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Accessible Visually Hidden & Skip Link */
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+.skip-link:focus {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 9999;
+  padding: 0.65rem 1.1rem;
+  background: var(--accent-primary);
+  color: #0f172a;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+/* Explicit Focus Indicators */
+:where(a:any-link, button):focus-visible {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 3px;
 }
 
 a {
   color: var(--accent-primary);
   text-decoration: none;
+  overflow-wrap: anywhere;
   transition: color 0.2s ease, opacity 0.2s ease;
 }
 
@@ -81,7 +115,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Header & Navigation */
+/* Header & Responsive Navigation */
 .site-header {
   position: sticky;
   top: 0;
@@ -94,11 +128,11 @@ a:hover {
 .header-inner {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 1rem 1.5rem;
+  padding: 0.85rem 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1rem;
   flex-wrap: wrap;
 }
 
@@ -106,24 +140,27 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  min-width: 0;
 }
 
 .brand-badge {
   font-family: var(--font-mono);
   font-size: 0.85rem;
   font-weight: 700;
-  color: var(--bg-primary);
+  color: #0f172a;
   background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
   padding: 0.35rem 0.6rem;
   border-radius: 8px;
   letter-spacing: -0.03em;
+  flex-shrink: 0;
 }
 
 .site-title {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: 1.12rem;
   font-weight: 700;
   letter-spacing: -0.02em;
+  line-height: 1.25;
 }
 
 .site-title a {
@@ -132,15 +169,29 @@ a:hover {
 }
 
 .site-subtitle {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   color: var(--text-muted);
   display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .main-navigation {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  order: 2;
+}
+
+.nav-menu-wrapper {
+  order: 1;
 }
 
 .nav-menu {
@@ -149,12 +200,14 @@ a:hover {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem;
+  gap: 0.25rem;
 }
 
 .nav-menu li a {
-  display: inline-block;
-  padding: 0.5rem 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.4rem;
+  padding: 0.45rem 0.8rem;
   border-radius: 8px;
   color: var(--text-secondary);
   font-size: 0.92rem;
@@ -167,26 +220,90 @@ a:hover {
 .nav-menu li.current-menu-item a,
 .nav-menu li.current_page_item a {
   color: var(--accent-primary);
-  background: rgba(56, 189, 248, 0.1);
+  background: rgba(56, 189, 248, 0.12);
 }
 
-.theme-toggle {
+.theme-toggle,
+.menu-toggle {
   background: var(--bg-secondary);
   color: var(--text-primary);
   border: 1px solid var(--border-subtle);
   border-radius: 8px;
-  padding: 0.45rem 0.7rem;
+  min-block-size: 2.5rem;
+  min-inline-size: 2.5rem;
+  padding: 0.4rem 0.65rem;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 1rem;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  justify-content: center;
   transition: border-color 0.2s ease, transform 0.15s ease;
 }
 
-.theme-toggle:hover {
+.theme-toggle:hover,
+.menu-toggle:hover {
   border-color: var(--accent-primary);
   transform: translateY(-1px);
+}
+
+.menu-toggle {
+  display: none;
+}
+
+/* Mobile Navigation Drawer */
+@media (max-width: 840px) {
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .main-navigation {
+    margin-left: auto;
+  }
+
+  .nav-menu-wrapper {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-header);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 0.85rem 1.25rem 1.15rem;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .nav-menu-wrapper.is-open {
+    display: block;
+  }
+
+  .nav-menu {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .nav-menu li a {
+    width: 100%;
+    padding: 0.65rem 0.9rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-subtitle {
+    max-width: 185px;
+  }
+}
+
+/* Coarse pointer touch target boost */
+@media (pointer: coarse) {
+  .nav-menu li a,
+  .theme-toggle,
+  .menu-toggle,
+  .btn-cta {
+    min-block-size: 2.75rem;
+    min-inline-size: 2.75rem;
+  }
 }
 
 /* Main Container with Container Queries */
@@ -195,21 +312,21 @@ a:hover {
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
-  padding: clamp(2rem, 4vw, 3.5rem) 1.5rem;
+  padding: clamp(1.5rem, 4vw, 3.25rem) clamp(1rem, 3vw, 1.5rem);
   container-type: inline-size;
   container-name: main-content;
 }
 
 /* Page Header Banner */
 .page-hero {
-  margin-bottom: 2.25rem;
-  padding-bottom: 1.5rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  padding-bottom: 1.25rem;
   border-bottom: 1px solid var(--border-subtle);
 }
 
 .page-kicker {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--accent-primary);
@@ -219,7 +336,7 @@ a:hover {
 
 .page-title {
   margin: 0;
-  font-size: clamp(1.85rem, 1.2rem + 2.5vw, 2.75rem);
+  font-size: clamp(1.65rem, 1.1rem + 2.5vw, 2.65rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.2;
@@ -230,25 +347,27 @@ a:hover {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  padding: clamp(1.5rem, 3.5vw, 2.75rem);
+  padding: clamp(1.25rem, 3.5vw, 2.75rem);
   box-shadow: var(--shadow-lg);
   backdrop-filter: blur(10px);
+  overflow-wrap: break-word;
 }
 
 /* Front Page / Início Layout using Container Queries */
 .home-content-wrapper .entry-content {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: 1.5rem;
   align-items: center;
 }
 
 @container main-content (min-width: 680px) {
   .home-content-wrapper .entry-content {
-    grid-template-columns: 240px 1fr;
+    grid-template-columns: 230px 1fr;
     grid-template-areas:
       "photo badge"
-      "photo bio";
+      "photo bio"
+      "photo cta";
     column-gap: 2.5rem;
     row-gap: 1rem;
   }
@@ -269,12 +388,17 @@ a:hover {
     margin: 0;
     align-self: start;
   }
+
+  .home-content-wrapper .entry-content > .hero-cta-group {
+    grid-area: cta;
+    margin-top: 0.25rem;
+  }
 }
 
 .home-content-wrapper .entry-content > p:first-of-type strong {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: 0.92rem;
+  font-size: clamp(0.8rem, 0.75rem + 0.25vw, 0.92rem);
   color: var(--accent-primary);
   background: rgba(56, 189, 248, 0.12);
   border: 1px solid var(--border-highlight);
@@ -282,13 +406,60 @@ a:hover {
   border-radius: 999px;
 }
 
+/* Hero Call-to-Action Buttons */
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+}
+
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 2.6rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.btn-cta:hover {
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.btn-cta-primary {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: #0f172a;
+  box-shadow: 0 8px 20px -6px rgba(56, 189, 248, 0.45);
+}
+
+.btn-cta-primary:hover {
+  color: #0f172a;
+}
+
+.btn-cta-secondary {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}
+
+.btn-cta-secondary:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
 .wp-block-image {
-  margin: 1.5rem 0;
+  margin: 1rem 0;
   text-align: center;
 }
 
 .wp-block-image img {
-  max-width: 240px;
+  max-width: 220px;
   width: 100%;
   height: auto;
   aspect-ratio: 1 / 1;
@@ -300,7 +471,7 @@ a:hover {
 
 /* Typography inside Gutenberg blocks */
 .entry-content h2.wp-block-heading {
-  font-size: clamp(1.35rem, 1.1rem + 1vw, 1.65rem);
+  font-size: clamp(1.25rem, 1.05rem + 1vw, 1.65rem);
   color: var(--text-primary);
   margin-top: 2.25rem;
   margin-bottom: 0.85rem;
@@ -320,16 +491,17 @@ a:hover {
   display: inline-block;
   width: 8px;
   height: 22px;
+  flex-shrink: 0;
   border-radius: 4px;
   background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
 }
 
 .entry-content h3.wp-block-heading {
-  font-size: clamp(1.1rem, 1rem + 0.5vw, 1.28rem);
+  font-size: clamp(1.05rem, 0.98rem + 0.5vw, 1.25rem);
   color: var(--accent-primary);
   margin-top: 1.6rem;
   margin-bottom: 0.5rem;
-  padding: 0.85rem 1.1rem;
+  padding: 0.8rem 1rem;
   background: rgba(56, 189, 248, 0.06);
   border-left: 3px solid var(--accent-primary);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
@@ -341,20 +513,41 @@ a:hover {
 
 .entry-content p {
   color: var(--text-secondary);
-  font-size: 1.04rem;
+  font-size: clamp(0.96rem, 0.92rem + 0.2vw, 1.04rem);
   margin: 0 0 1.2rem;
+}
+
+/* Style inline repository/external links inside content paragraphs as subtle badges */
+.entry-content p a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.15rem 0.55rem;
+  margin: 0.15rem 0;
+  border-radius: 6px;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid var(--border-highlight);
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.entry-content p a:hover {
+  background: rgba(56, 189, 248, 0.2);
+  transform: translateY(-1px);
 }
 
 .entry-content ul.wp-block-list,
 .entry-content ol.wp-block-list {
   margin: 0.75rem 0 1.5rem;
-  padding-left: 1.5rem;
+  padding-left: 1.35rem;
   color: var(--text-secondary);
 }
 
 .entry-content ul.wp-block-list li,
 .entry-content ol.wp-block-list li {
-  margin-bottom: 0.55rem;
+  margin-bottom: 0.65rem;
   padding-left: 0.35rem;
 }
 
@@ -364,9 +557,16 @@ a:hover {
   font-weight: 700;
 }
 
+.entry-content ul.wp-block-list li a {
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 6px;
+  background: rgba(56, 189, 248, 0.08);
+}
+
 /* Quick Navigation Cards on Homepage */
 .quick-sections {
-  margin-top: 2.5rem;
+  margin-top: 2rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 1rem;
@@ -411,7 +611,7 @@ a:hover {
 .site-footer {
   border-top: 1px solid var(--border-subtle);
   background: var(--bg-secondary);
-  padding: 2rem 1.5rem;
+  padding: 1.75rem 1.25rem;
   margin-top: auto;
 }
 
@@ -423,16 +623,20 @@ a:hover {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
 }
 
 .footer-links {
   display: flex;
-  gap: 1.25rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.25rem;
   color: var(--text-secondary);
   font-weight: 500;
 }

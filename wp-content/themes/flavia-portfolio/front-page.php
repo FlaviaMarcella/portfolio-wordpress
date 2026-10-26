@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main class="site-main home-content-wrapper">
+<main id="main-content" class="site-main home-content-wrapper" tabindex="-1">
 	<?php
 	while ( have_posts() ) :
 		the_post();
@@ -15,10 +15,25 @@ get_header();
 
 			<div class="entry-content">
 				<?php the_content(); ?>
+
+				<div class="hero-cta-group">
+					<a class="btn-cta btn-cta-primary" href="<?php echo esc_url( home_url( '/trabalho-e-estudo/' ) ); ?>">
+						Ver Projetos &amp; Repositórios
+					</a>
+					<a class="btn-cta btn-cta-secondary" href="https://github.com/FlaviaMarcella" target="_blank" rel="noopener noreferrer">
+						GitHub (@FlaviaMarcella) ↗
+					</a>
+					<a class="btn-cta btn-cta-secondary" href="https://linkedin.com/in/flavia-marcella" target="_blank" rel="noopener noreferrer">
+						LinkedIn ↗
+					</a>
+					<a class="btn-cta btn-cta-secondary" href="<?php echo esc_url( home_url( '/contato/' ) ); ?>">
+						Contato
+					</a>
+				</div>
 			</div>
 		</article>
 
-		<section class="quick-sections" aria-label="Navegação rápida pelo portfólio">
+		<section class="quick-sections">
 			<a class="quick-card" href="<?php echo esc_url( home_url( '/trabalho-e-estudo/' ) ); ?>">
 				<span class="quick-card-kicker">01 / PROJETOS &amp; GITHUB</span>
 				<span class="quick-card-title">Trabalho e Estudo</span>
