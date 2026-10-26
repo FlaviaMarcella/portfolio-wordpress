@@ -20,9 +20,9 @@ get_header();
 
 		<section class="quick-sections" aria-label="Navegação rápida pelo portfólio">
 			<a class="quick-card" href="<?php echo esc_url( home_url( '/trabalho-e-estudo/' ) ); ?>">
-				<span class="quick-card-kicker">01 / PROJETOS</span>
+				<span class="quick-card-kicker">01 / PROJETOS &amp; GITHUB</span>
 				<span class="quick-card-title">Trabalho e Estudo</span>
-				<span class="quick-card-desc">Java, Spring Boot, APIs REST, Novo SISMET, SmartAgro e mais.</span>
+				<span class="quick-card-desc">Java, Spring Boot, .NET, AWS Bedrock, Manager Financial, Novo SISMET e mais.</span>
 			</a>
 			<a class="quick-card" href="<?php echo esc_url( home_url( '/formacao-academica/' ) ); ?>">
 				<span class="quick-card-kicker">02 / EDUCAÇÃO</span>
@@ -32,7 +32,7 @@ get_header();
 			<a class="quick-card" href="<?php echo esc_url( home_url( '/passatempos-e-interesses/' ) ); ?>">
 				<span class="quick-card-kicker">03 / SOBRE MIM</span>
 				<span class="quick-card-title">Passatempos e Interesses</span>
-				<span class="quick-card-desc">Café do Sul de Minas, liderança colaborativa, estudos e plantas.</span>
+				<span class="quick-card-desc">Café da tarde, tempo com família e amigos, jogos de simulação e tecnologia.</span>
 			</a>
 			<a class="quick-card" href="<?php echo esc_url( home_url( '/contato/' ) ); ?>">
 				<span class="quick-card-kicker">04 / CONEXÃO</span>
